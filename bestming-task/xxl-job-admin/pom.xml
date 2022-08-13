@@ -95,14 +95,14 @@
 		</dependency>
 
 		<dependency>
-			<groupId>cn.dengta</groupId>
+			<groupId>cn.bestming</groupId>
 			<artifactId>common-alarm</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<!-- xxl-job-core -->
 		<dependency>
-			<groupId>cn.dengta</groupId>
+			<groupId>cn.bestming</groupId>
 			<artifactId>xxl-job-core</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
