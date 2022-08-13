@@ -77,36 +77,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>cn.dengta</groupId>
-			<artifactId>common-dao</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>cn.dengta</groupId>
-			<artifactId>common-redis</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>cn.dengta</groupId>
-			<artifactId>common-context</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>cn.dengta</groupId>
-			<artifactId>common-validator</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>cn.dengta</groupId>
-			<artifactId>common-misc</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<exclusions>
@@ -332,12 +302,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>cn.dengta</groupId>
-			<artifactId>common-test</artifactId>
-			<version>1.0.0</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<repositories>
