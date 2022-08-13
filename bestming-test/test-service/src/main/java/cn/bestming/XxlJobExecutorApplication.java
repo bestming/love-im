@@ -1,0 +1,15 @@
+package cn.bestming;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * @author wxm
+ * @date 2022/8/13 18:42
+ */
+@SpringBootApplication
+public class XxlJobExecutorApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(XxlJobExecutorApplication.class, args);
+    }
+
+}

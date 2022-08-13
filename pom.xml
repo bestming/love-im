@@ -11,7 +11,9 @@
 
     <modules>
         <module>bestming-task</module>
+        <module>bestming-test</module>
         <module>common</module>
+        <module>bestming-api</module>
     </modules>
 
 </project>

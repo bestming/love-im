@@ -1,6 +1,8 @@
 package com.xxl.job.core.util;
 
+import com.alibaba.fastjson.JSON;
 import com.xxl.job.core.biz.model.ReturnT;
+import me.codeplayer.util.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +10,8 @@ import javax.net.ssl.*;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.cert.CertificateException;
@@ -100,7 +104,7 @@ public class XxlJobRemotingUtil {
 
             // write requestBody
             if (requestObj != null) {
-                String requestBody = GsonTool.toJson(requestObj);
+                String requestBody = JSONUtil.encode(requestObj);
 
                 DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream());
                 dataOutputStream.write(requestBody.getBytes("UTF-8"));
@@ -132,8 +136,7 @@ public class XxlJobRemotingUtil {
 
             // parse returnT
             try {
-                ReturnT returnT = GsonTool.fromJson(resultJson, ReturnT.class, returnTargClassOfT);
-                return returnT;
+                return JSON.parseObject(resultJson, new ParameterizedType4ReturnT(ReturnT.class, returnTargClassOfT));
             } catch (Exception e) {
                 logger.error("xxl-job remoting (url="+url+") response content invalid("+ resultJson +").", e);
                 return new ReturnT<String>(ReturnT.FAIL_CODE, "xxl-job remoting (url="+url+") response content invalid("+ resultJson +").");
@@ -155,5 +158,30 @@ public class XxlJobRemotingUtil {
             }
         }
     }
+    public static class ParameterizedType4ReturnT implements ParameterizedType {
 
+        private final Class raw;
+        private final Type[] args;
+
+        public ParameterizedType4ReturnT(Class raw, Type... args) {
+            this.raw = raw;
+            this.args = args != null ? args : new Type[0];
+        }
+
+        @Override
+        public Type[] getActualTypeArguments() {
+            return args;
+        }
+
+        @Override
+        public Type getRawType() {
+            return raw;
+        }
+
+        @Override
+        public Type getOwnerType() {
+            return null;
+        }
+
+    }
 }

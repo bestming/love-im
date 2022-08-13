@@ -1,10 +1,10 @@
 package com.xxl.job.core.server;
 
+import com.alibaba.fastjson.JSON;
 import com.xxl.job.core.biz.ExecutorBiz;
 import com.xxl.job.core.biz.impl.ExecutorBizImpl;
 import com.xxl.job.core.biz.model.*;
 import com.xxl.job.core.thread.ExecutorRegistryThread;
-import com.xxl.job.core.util.GsonTool;
 import com.xxl.job.core.util.ThrowableUtil;
 import com.xxl.job.core.util.XxlJobRemotingUtil;
 import io.netty.bootstrap.ServerBootstrap;
@@ -17,6 +17,7 @@ import io.netty.handler.codec.http.*;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
+import me.codeplayer.util.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -158,7 +159,7 @@ public class EmbedServer {
                     Object responseObj = process(httpMethod, uri, requestData, accessTokenReq);
 
                     // to json
-                    String responseJson = GsonTool.toJson(responseObj);
+                    String responseJson = JSONUtil.encode(responseObj);
 
                     // write response
                     writeResponse(ctx, keepAlive, responseJson);
@@ -186,16 +187,16 @@ public class EmbedServer {
                     case "/beat":
                         return executorBiz.beat();
                     case "/idleBeat":
-                        IdleBeatParam idleBeatParam = GsonTool.fromJson(requestData, IdleBeatParam.class);
+                        IdleBeatParam idleBeatParam = JSON.parseObject(requestData, IdleBeatParam.class);
                         return executorBiz.idleBeat(idleBeatParam);
                     case "/run":
-                        TriggerParam triggerParam = GsonTool.fromJson(requestData, TriggerParam.class);
+                        TriggerParam triggerParam = JSON.parseObject(requestData, TriggerParam.class);
                         return executorBiz.run(triggerParam);
                     case "/kill":
-                        KillParam killParam = GsonTool.fromJson(requestData, KillParam.class);
+                        KillParam killParam = JSON.parseObject(requestData, KillParam.class);
                         return executorBiz.kill(killParam);
                     case "/log":
-                        LogParam logParam = GsonTool.fromJson(requestData, LogParam.class);
+                        LogParam logParam = JSON.parseObject(requestData, LogParam.class);
                         return executorBiz.log(logParam);
                     default:
                         return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, uri-mapping(" + uri + ") not found.");

@@ -94,12 +94,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>cn.bestming</groupId>
-			<artifactId>common-alarm</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
 		<!-- xxl-job-core -->
 		<dependency>
 			<groupId>cn.bestming</groupId>
